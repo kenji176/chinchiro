@@ -1,1 +1,164 @@
-<div id="script"><div style=display:flex;justify-content:flex-end><button class="run_btn" type="button" style=border-radius:20px; class=run_button>Run</button></div></div>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>ChinChro-jp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="Style.css" type="text/css">
+    <script src="https://unpkg.com/vue@next"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+</head>
+<body class="bg-dark">
+    <div class="container">
+        <div class="h-100 d-flex justify-content-center align-items-center">
+            <div class="card mt-5">
+                <div class="card-body">
+                    <div id="Chinchirorin">
+                        <div class="d-flex text-center pb-4">
+                            <div class="flex-fill">
+                                <img :src="Saikoros[0]" class="img-thumbnail dem" id="s1">
+                            </div>
+                            <div class="flex-fill">
+                                <img :src="Saikoros[1]" class="img-thumbnail dem" id="s2">
+                            </div>
+                            <div class="flex-fill">
+                                <img :src="Saikoros[2]" class="img-thumbnail dem" id="s3">
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2 ">
+                            <button type="button" class="btn btn-danger rounded-pill" v-on:click="Saikoro">サイコロをふる</button>
+                        </div>
+                        <p class="border-bottom text-end py-2 me-1">結果は{{message}}です</p>
+                    </div>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr class="text-center">
+                                <th scope="col">#</th>
+                                <th scope="col">名称</th>
+                                <th scope="col">出目</th>
+                                <th scope="col">配当</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>ピンゾロ</td>
+                                <td class="text-center">
+                                    <i class="bi bi-dice-1"></i>
+                                    <i class="bi bi-dice-1"></i>
+                                    <i class="bi bi-dice-1"></i>
+                                </td>
+                                <td class="text-end">5倍</td>
+                            </tr>
+                            <tr class="align-middle">
+                                <td>2</td>
+                                <td>ゾロ目</td>
+                                <td class="text-center">
+                                    <div class="2">
+                                        <i class="bi bi-dice-2"></i>
+                                        <i class="bi bi-dice-2"></i>
+                                        <i class="bi bi-dice-2"></i>
+                                    </div>
+                                    <div class="3">
+                                        <i class="bi bi-dice-3"></i>
+                                        <i class="bi bi-dice-3"></i>
+                                        <i class="bi bi-dice-3"></i>
+                                    </div>
+                                    <div class="4">
+                                        <i class="bi bi-dice-4"></i>
+                                        <i class="bi bi-dice-4"></i>
+                                        <i class="bi bi-dice-4"></i>
+                                    </div>
+                                    <div class="5">
+                                        <i class="bi bi-dice-5"></i>
+                                        <i class="bi bi-dice-5"></i>
+                                        <i class="bi bi-dice-5"></i>
+                                    </div>
+                                    <div class="6">
+                                        <i class="bi bi-dice-6"></i>
+                                        <i class="bi bi-dice-6"></i>
+                                        <i class="bi bi-dice-6"></i>
+                                    </div>
+                                </td>
+                                <td class="text-end">3倍</td>
+                            </tr>
+                            <tr class="align-middle">
+                                <td>3</td>
+                                <td>シゴロ</td>
+                                <td class="text-center">
+                                    <i class="bi bi-dice-4"></i>
+                                    <i class="bi bi-dice-5"></i>
+                                    <i class="bi bi-dice-6"></i>
+                                </td>
+                                <td class="text-end">2倍,即勝ち</td>
+                            </tr>
+                            <tr class="align-middle">
+                                <td>4</td>
+                                <td>通常の目</td>
+                                <td class="text-center">
+                                    <div class="2">
+                                        <i class="bi bi-dice-2"></i>
+                                        <i class="bi bi-dice-2"></i>
+                                        <i class="bi bi-dice-6"></i>
+                                    </div>
+                                    <div class="3">
+                                        <i class="bi bi-dice-2"></i>
+                                        <i class="bi bi-dice-2"></i>
+                                        <i class="bi bi-dice-5"></i>
+                                    </div>
+                                    <div class="4">
+                                        <i class="bi bi-dice-2"></i>
+                                        <i class="bi bi-dice-2"></i>
+                                        <i class="bi bi-dice-4"></i>
+                                    </div>
+                                    <div class="5">
+                                        <i class="bi bi-dice-2"></i>
+                                        <i class="bi bi-dice-2"></i>
+                                        <i class="bi bi-dice-3"></i>
+                                    </div>
+                                    <div class="6">
+                                        <i class="bi bi-dice-2"></i>
+                                        <i class="bi bi-dice-2"></i>
+                                        <i class="bi bi-dice-1"></i>
+                                    </div>
+                                </td>
+                                <td class="text-end">1倍</td>
+                            </tr>
+                            <tr class="align-middle">
+                                <td>5</td>
+                                <td>役無し</td>
+                                <td class="text-center">
+                                    <div class="2">
+                                        <i class="bi bi-dice-1"></i>
+                                        <i class="bi bi-dice-5"></i>
+                                        <i class="bi bi-dice-6"></i>
+                                    </div>
+                                </td>
+                                <td class="text-end">即負け</td>
+                            </tr>
+                            <tr class="align-middle">
+                                <td>6</td>
+                                <td>ヒフミ</td>
+                                <td class="text-center">
+                                    <div class="2">
+                                        <i class="bi bi-dice-1"></i>
+                                        <i class="bi bi-dice-2"></i>
+                                        <i class="bi bi-dice-3"></i>
+                                    </div>
+                                </td>
+                                <td class="text-end">2倍払い,即負け</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="https://twitter.com/250000?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @250000</a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="index.js"></script>
+</body>
+</html>
